@@ -7,7 +7,22 @@ public class CavernFinder {
 	private Cell[][] theCave;
 	private ArrayList<Robot> robots;
 	private int currentRobot;
+	private String mapName;
+	private String legendName;
 	
+	public CavernFinder(String mapName, String legendName) {
+		super();
+	}
+
+	public void loadConfigFiles() {
+		
+	}
+	
+	public Cell getCellAt(int x, int y) {
+		return theCave[x][y];
+	}
+	
+	// Getters and setters
 	public Cell[][] getTheCave() {
 		return theCave;
 	}

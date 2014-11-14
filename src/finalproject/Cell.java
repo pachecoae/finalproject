@@ -1,14 +1,19 @@
 package finalproject;
 
 public class Cell {
-	private String cave;
+	private char cellName;
 	private CellType cellType;
 
 	public enum CellType {
 		CAVE, WALKWAY, WALL;
 	}
 	
-	public String getCave() {
-		return cave;
+	// Getters and Setters
+	public char getCellName() {
+		return cellName;
+	}
+	
+	public CellType getCellType() {
+		return cellType;
 	}
 }

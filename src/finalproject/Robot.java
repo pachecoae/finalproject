@@ -12,11 +12,20 @@ public class Robot {
 	private Stack<Direction> currentPath;
 	private ArrayList<Cell> traveledTo;
 	
-	public void moveOneCell() {
+	public Route findNewCave() {
+		//TODO: Add route to known route.
+		return new Route();
+	}
+	
+	public void goToCave(char cellName) {
 		
 	}
 	
-	public Route askRobot(Robot robot, String cavern) {
+	public void moveOneCell(Direction direction) {
+		
+	}
+	
+	public Route askRobot(Robot robot, char cavern) {
 		
 		return new Route();
 	}
@@ -24,4 +33,27 @@ public class Robot {
 	public void returnHome() {
 		
 	}
+	
+	// Getters and Setters
+	public int getxCoord() {
+		return xCoord;
+	}
+
+	public int getyCoord() {
+		return yCoord;
+	}
+
+	public ArrayList<Route> getRoutesKnown() {
+		return routesKnown;
+	}
+
+	public Stack<Direction> getCurrentPath() {
+		return currentPath;
+	}
+
+	public ArrayList<Cell> getTraveledTo() {
+		return traveledTo;
+	}
+	
+	
 }

@@ -22,16 +22,37 @@ public class Robot {
 	}
 	
 	public void moveOneCell(Direction direction) {
-		
+		switch (direction) {
+		case NORTH:
+			yCoord ++;
+			break;
+		case SOUTH:
+			yCoord --;
+			break;
+			
+		case EAST:
+			xCoord ++;
+			break;
+			
+		case WEST:
+			xCoord --;
+			break;
+
+		default:
+			break;
+		}
 	}
 	
-	public Route askRobot(Robot robot, char cavern) {
-		
-		return new Route();
+	public void askRobot(Robot robot, char cavern) {
+		ArrayList<Route> learnRoutes = robot.getRoutesKnown();
+		for (Route r : learnRoutes) {
+			routesKnown.add(r);
+		}
 	}
 	
 	public void returnHome() {
-		
+		xCoord = 28;
+		yCoord = 28;
 	}
 	
 	// Getters and Setters
@@ -54,6 +75,4 @@ public class Robot {
 	public ArrayList<Cell> getTraveledTo() {
 		return traveledTo;
 	}
-	
-	
 }

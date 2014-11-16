@@ -1,0 +1,10 @@
+W,Wall
+P,Path
+A,Cave A
+A,Cave B
+A,Cave C
+A,Cave D
+A,Cave E
+A,Cave F
+A,Cave G
+A,Cave H

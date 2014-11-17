@@ -8,6 +8,16 @@ public class Route {
 	private char cellName;
 	private ArrayList<Direction> theRoute;
 	
+	public Route() {
+		cellName = ' ';
+		theRoute = null;
+	}
+	
+	public Route(char c, ArrayList<Direction> someRoute) {
+		theRoute = someRoute;
+		cellName = c;
+	}
+	
 	public enum Direction {
 		NORTH, SOUTH, EAST, WEST;
 	}

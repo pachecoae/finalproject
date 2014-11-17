@@ -67,7 +67,7 @@ public class Tests {
 	public void testFindCave() {
 		robot2.getRoutesKnown().add(route);
 		robot1.askRobot(robot2, 'E');
-		Route newRoute = robot1.findNewCave();
+		Route newRoute = robot1.goToCave('E');
 		Assert.assertNotSame(robot2.getRoutesKnown().get(0), newRoute);
 		Assert.assertNotSame('E', newRoute.getCellName());
 	}

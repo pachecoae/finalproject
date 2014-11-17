@@ -9,8 +9,18 @@ public class Robot {
 	private int xCoord;
 	private int yCoord;
 	private ArrayList<Route> routesKnown;
-	private Stack<Direction> currentPath;
+	private ArrayList<Direction> currentPath;
 	private ArrayList<Cell> traveledTo;
+	private CavernFinder cavernFinder;
+	
+	public Robot(int x, int y, CavernFinder cf) {
+		xCoord = x;
+		yCoord = y;
+		cavernFinder = cf;
+		routesKnown = new ArrayList<Route>();
+		currentPath = new ArrayList<Direction>();
+		traveledTo = new ArrayList<Cell>();
+	}
 	
 	public Route findNewCave() {
 		//TODO: Add route to known route.
@@ -29,7 +39,6 @@ public class Robot {
 		case SOUTH:
 			yCoord --;
 			break;
-			
 		case EAST:
 			xCoord ++;
 			break;
@@ -43,16 +52,31 @@ public class Robot {
 		}
 	}
 	
-	public void askRobot(Robot robot, char cavern) {
-		ArrayList<Route> learnRoutes = robot.getRoutesKnown();
-		for (Route r : learnRoutes) {
-			routesKnown.add(r);
+	public Route askRobot(char cavern) {
+		for (Route r : routesKnown) {
+			if (cavern == r.getCellName()) return r;
 		}
+		Route temp = new Route();
+		return temp;
 	}
 	
 	public void returnHome() {
-		xCoord = 28;
-		yCoord = 28;
+		for (int i = currentPath.size(); i > 0; i--) {			
+			switch (currentPath.get(i)) {
+			case NORTH:
+				moveOneCell(Direction.SOUTH);
+				break;
+			case SOUTH:
+				moveOneCell(Direction.NORTH);
+				break;
+			case EAST:
+				moveOneCell(Direction.WEST);
+				break;
+			case WEST:
+				moveOneCell(Direction.EAST);
+				break;
+			}
+		}
 	}
 	
 	// Getters and Setters
@@ -68,7 +92,7 @@ public class Robot {
 		return routesKnown;
 	}
 
-	public Stack<Direction> getCurrentPath() {
+	public ArrayList<Direction> getCurrentPath() {
 		return currentPath;
 	}
 

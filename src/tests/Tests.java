@@ -2,6 +2,7 @@ package tests;
 
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.Stack;
 
 import junit.framework.Assert;
@@ -19,38 +20,50 @@ public class Tests {
 	private Robot robot1;
 	private Robot robot2;
 	private Route route;
-
+	private ArrayList<Direction> dir;
+	
 	@Before
 	public void setup() {
+		dir = new ArrayList<Direction>();
 		cavernFinder = new CavernFinder("caveMap.csv", "legend.txt");
+		robot1 = new Robot(1, 1, cavernFinder);
+		robot2 = new Robot(1, 1, cavernFinder);
 		cavernFinder.loadConfigFiles();
-		cavernFinder.getRobots().add(robot1);
-		cavernFinder.getRobots().add(robot2);
+		//cavernFinder.getRobots().add(robot1);
+		//cavernFinder.getRobots().add(robot2);
 
 		// Create route to nearest cave.
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
+		/*route.getTheRoute().add(Direction.NORTH);
 		route.getTheRoute().add(Direction.NORTH);
 		route.getTheRoute().add(Direction.NORTH);
 		route.getTheRoute().add(Direction.NORTH);
 
 		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+
+		route.getTheRoute().add(Direction.WEST);*/
+		
+		dir.add(Direction.WEST);
+		dir.add(Direction.WEST);
+		dir.add(Direction.WEST);
+		dir.add(Direction.NORTH);
+		dir.add(Direction.EAST);
+		dir.add(Direction.EAST);
+		dir.add(Direction.EAST);
 	}
 
 	// File I/O
@@ -122,6 +135,14 @@ public class Tests {
 	public void testTravelledTo() {
 		robot1.getRoutesKnown().add(route);
 		Assert.assertEquals('E', robot1.getTraveledTo().get(0));;
+	}
+	
+	@Test
+	public void testOptimize() {
+		robot1.giveDirections(dir);
+		robot1.optimizeRoute();
+		Assert.assertEquals(1, dir.size());;
+		Assert.assertEquals(dir.get(0), Direction.NORTH);;
 	}
 
 }

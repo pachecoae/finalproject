@@ -166,7 +166,43 @@ public class Robot {
 	}
 	
 	public void optimizeRoute() {
-		
+		/*This function checks every triple of directions in the current path
+		If we have a triple of directions where we move one direction, then orthogonal
+		to it, then opposite to it, we can ignore the first and third directions since 
+		they cancel each other out and focus solely on the middle direction */
+		for (int i = 0; i < currentPath.size() - 2; i++) {
+			switch (currentPath.get(i)) {
+			case WEST:
+				if ((currentPath.get(i+1) == Direction.SOUTH || currentPath.get(i+1) == Direction.NORTH) && currentPath.get(i+2) == Direction.EAST) {
+					currentPath.remove(i+2);
+					currentPath.remove(i);
+					i = i - 2;
+				}
+				break;
+			case EAST:
+				if ((currentPath.get(i+1) == Direction.SOUTH || currentPath.get(i+1) == Direction.NORTH) && currentPath.get(i+2) == Direction.WEST) {
+					currentPath.remove(i+2);
+					currentPath.remove(i);
+					i = i - 2;
+				}
+				break;
+			case SOUTH:
+				if ((currentPath.get(i+1) == Direction.EAST || currentPath.get(i+1) == Direction.WEST) && currentPath.get(i+2) == Direction.NORTH) {
+					currentPath.remove(i+2);
+					currentPath.remove(i);
+					i = i - 2;
+				}
+				break;
+			case NORTH:
+				if ((currentPath.get(i+1) == Direction.EAST || currentPath.get(i+1) == Direction.WEST) && currentPath.get(i+2) == Direction.SOUTH) {
+					currentPath.remove(i+2);
+					currentPath.remove(i);
+					i = i - 2;
+				}
+				break;
+			}
+			if (i < 0) i = -1;
+		}
 	}
 	
 	// Getters and Setters
@@ -188,5 +224,10 @@ public class Robot {
 
 	public ArrayList<Cell> getTraveledTo() {
 		return traveledTo;
+	}
+	
+	//For testing purposes
+	public void giveDirections(ArrayList<Direction> dir) {
+		currentPath = dir;
 	}
 }

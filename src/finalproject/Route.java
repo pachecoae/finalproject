@@ -6,11 +6,11 @@ import finalproject.Route.Direction;
 
 public class Route {
 	private char cellName;
-	private ArrayList<Direction> theRoute;
+	public ArrayList<Direction> theRoute;
 	
 	public Route() {
 		cellName = ' ';
-		theRoute = null;
+		this.theRoute = new ArrayList<Direction>();
 	}
 	
 	public Route(char c, ArrayList<Direction> someRoute) {

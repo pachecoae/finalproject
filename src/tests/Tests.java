@@ -128,7 +128,6 @@ public class Tests {
 	public void testCurrentPath() {
 		robot1.getRoutesKnown().add(route);
 		robot1.goToCave('E');
-
 		// Check that the top of the stack is equal to the last elements in the route and
 		// that the bottom of the stack is equal to the first element in the route. I wasn't
 		// sure if you could directly compare a stack to an array list.

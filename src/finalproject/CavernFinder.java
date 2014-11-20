@@ -16,17 +16,17 @@ public class CavernFinder {
 	private int numX;
 	private int numY;
 	private static final int MAX_SIZE = 30;
-	
-//	this.board = new Board(this);
-//	this.rooms = new HashMap<Character, String>();
-//	this.players = new ArrayList<>();
-//	this.mapFile = map;
-//	this.legendFile = legend;
-//	this.playerFile = players;
-//	this.deckFile = deck;
-//	this.deck = new ArrayList<>();
-//	this.solution = new Solution();
-//	this.turn = 5;
+
+	// this.board = new Board(this);
+	// this.rooms = new HashMap<Character, String>();
+	// this.players = new ArrayList<>();
+	// this.mapFile = map;
+	// this.legendFile = legend;
+	// this.playerFile = players;
+	// this.deckFile = deck;
+	// this.deck = new ArrayList<>();
+	// this.solution = new Solution();
+	// this.turn = 5;
 
 	public CavernFinder() {
 		this.robots = new ArrayList<Robot>();
@@ -53,7 +53,8 @@ public class CavernFinder {
 			// Should have 2 parts per line
 			if (parts.length != 2) {
 				fileIn.close();
-				throw new Exception("Legend has too many arguments on one line.");
+				throw new Exception(
+						"Legend has too many arguments on one line.");
 			}
 
 			// Make sure first part is a char
@@ -92,7 +93,7 @@ public class CavernFinder {
 			}
 			// Loop through the parts array to initialize cells
 			for (int i = 0; i < parts.length; i++) {
-					theCave[numY][i] = new Cell(i, numY, parts[i].charAt(0));
+				theCave[numY][i] = new Cell(i, numY, parts[i].charAt(0));
 			}
 			// Update rows
 			numY++;

@@ -134,10 +134,10 @@ public class Robot {
 	public void moveOneCell(Direction direction) {
 		switch (direction) {
 		case NORTH:
-			yCoord ++;
+			yCoord --;
 			break;
 		case SOUTH:
-			yCoord --;
+			yCoord ++;
 			break;
 		case EAST:
 			xCoord ++;
@@ -161,7 +161,7 @@ public class Robot {
 	}
 	
 	public void returnHome() {
-		for (int i = currentPath.size(); i > 0; i--) {			
+		for (int i = currentPath.size() - 1; i > -1; i--) {			
 			switch (currentPath.get(i)) {
 			case NORTH:
 				moveOneCell(Direction.SOUTH);

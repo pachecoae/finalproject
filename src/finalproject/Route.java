@@ -6,7 +6,7 @@ import finalproject.Route.Direction;
 
 public class Route {
 	private char cellName;
-	public ArrayList<Direction> theRoute;
+	private ArrayList<Direction> theRoute;
 	
 	public Route() {
 		cellName = ' ';
@@ -30,3 +30,4 @@ public class Route {
 		return theRoute;
 	}
 }
+

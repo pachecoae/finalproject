@@ -19,38 +19,50 @@ public class Tests {
 	private CavernFinder cavernFinder;
 	private Robot robot1;
 	private Robot robot2;
+	private Robot robot3;
 	private Route route;
 	private ArrayList<Direction> dir;
-
+	private ArrayList<Direction> homeTest;
+	
 	@Before
 	public void setup() {
 		dir = new ArrayList<Direction>();
+		homeTest = new ArrayList<Direction>();
 		cavernFinder = new CavernFinder();
-		robot1 = new Robot(1, 1, cavernFinder);
-		robot2 = new Robot(1, 1, cavernFinder);
 		cavernFinder.loadConfigFiles();
-		// cavernFinder.getRobots().add(robot1);
-		// cavernFinder.getRobots().add(robot2);
+		robot1 = new Robot(28, 28, cavernFinder);
+		robot2 = new Robot(28, 28, cavernFinder);
+		robot3 = new Robot(25, 25, cavernFinder);
+	
+		//cavernFinder.getRobots().add(robot1);
+		//cavernFinder.getRobots().add(robot2);
 
 		// Create route to nearest cave.
+		/*route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
 
-		/*
-		 * route = new Route(); route.getTheRoute().add(Direction.NORTH); route.getTheRoute().add(Direction.NORTH);
-		 * route.getTheRoute().add(Direction.NORTH); route.getTheRoute().add(Direction.NORTH);
-		 * 
-		 * route.getTheRoute().add(Direction.WEST); route.getTheRoute().add(Direction.WEST);
-		 * route.getTheRoute().add(Direction.WEST); route.getTheRoute().add(Direction.WEST);
-		 * route.getTheRoute().add(Direction.WEST); route.getTheRoute().add(Direction.WEST);
-		 * route.getTheRoute().add(Direction.WEST);
-		 * 
-		 * route.getTheRoute().add(Direction.NORTH); route.getTheRoute().add(Direction.NORTH);
-		 * route.getTheRoute().add(Direction.NORTH); route.getTheRoute().add(Direction.NORTH);
-		 * route.getTheRoute().add(Direction.NORTH); route.getTheRoute().add(Direction.NORTH);
-		 * route.getTheRoute().add(Direction.NORTH); route.getTheRoute().add(Direction.NORTH);
-		 * 
-		 * route.getTheRoute().add(Direction.WEST);
-		 */
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
+		route.getTheRoute().add(Direction.WEST);
 
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+		route.getTheRoute().add(Direction.NORTH);
+
+		route.getTheRoute().add(Direction.WEST);*/
+		
+		//for optimize test
 		dir.add(Direction.WEST);
 		dir.add(Direction.WEST);
 		dir.add(Direction.WEST);
@@ -58,6 +70,13 @@ public class Tests {
 		dir.add(Direction.EAST);
 		dir.add(Direction.EAST);
 		dir.add(Direction.EAST);
+		
+		homeTest.add(Direction.WEST);
+		homeTest.add(Direction.WEST);
+		homeTest.add(Direction.WEST);
+		homeTest.add(Direction.NORTH);
+		homeTest.add(Direction.NORTH);
+		homeTest.add(Direction.NORTH);
 	}
 
 	// File I/O
@@ -89,29 +108,26 @@ public class Tests {
 
 	@Test
 	public void testMoveOneCell() {
-		robot1.returnHome();
 		robot1.moveOneCell(Direction.NORTH);
 		Assert.assertEquals(28, robot1.getxCoord());
 		Assert.assertEquals(27, robot1.getyCoord());
 
-		robot1.returnHome();
+		robot1.moveOneCell(Direction.SOUTH);
 		robot1.moveOneCell(Direction.WEST);
 		Assert.assertEquals(27, robot1.getxCoord());
 		Assert.assertEquals(28, robot1.getyCoord());
 	}
 
-	@Test
-	public void testReturnHome() {
-		robot1.returnHome();
-		Assert.assertEquals(28, robot1.getxCoord());
-		Assert.assertEquals(28, robot1.getyCoord());
-	}
+	// I didn't think this was needed. It seems to be tested for in testAskRobot and testFindCave.
+	// @Test
+	// public void testRobotRoute() {
+	// fail("Not yet implemented");
+	// }
 
 	@Test
 	public void testCurrentPath() {
 		robot1.getRoutesKnown().add(route);
 		robot1.goToCave('E');
-
 		// Check that the top of the stack is equal to the last elements in the route and
 		// that the bottom of the stack is equal to the first element in the route. I wasn't
 		// sure if you could directly compare a stack to an array list.
@@ -122,9 +138,9 @@ public class Tests {
 	@Test
 	public void testTravelledTo() {
 		robot1.getRoutesKnown().add(route);
-		Assert.assertEquals('E', robot1.getTraveledTo().get(0));
-		;
+		Assert.assertEquals('E', robot1.getTraveledTo().get(0));;
 	}
+<<<<<<< HEAD
 
 //	@Test
 //	public void testOptimize() {
@@ -133,4 +149,23 @@ public class Tests {
 //		Assert.assertEquals(1, dir.size());
 //		Assert.assertEquals(dir.get(0), Direction.NORTH);
 //	}
+=======
+	
+	@Test
+	public void testOptimize() {
+		robot1.giveDirections(dir);
+		robot1.optimizeRoute();
+		Assert.assertEquals(1, dir.size());;
+		Assert.assertEquals(dir.get(0), Direction.NORTH);;
+	}
+	
+	@Test
+	public void testReturnHome() {
+		robot3.giveDirections(homeTest);
+		robot3.returnHome();
+		Assert.assertEquals(robot3.getxCoord(), 28);
+		Assert.assertEquals(robot3.getyCoord(), 28);
+	}
+
+>>>>>>> 8700b76414938213433a1ec375d69711c4cd5c5a
 }

@@ -103,7 +103,8 @@ public class CavernFinder extends JFrame {
 			// Should have 2 parts per line
 			if (parts.length != 2) {
 				fileIn.close();
-				throw new Exception("Legend has too many arguments on one line.");
+				throw new Exception(
+						"Legend has too many arguments on one line.");
 			}
 
 			// Make sure first part is a char

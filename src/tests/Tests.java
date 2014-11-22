@@ -126,11 +126,11 @@ public class Tests {
 		;
 	}
 
-	@Test
-	public void testOptimize() {
-//		robot1.giveDirections(dir);
-		robot1.optimizeRoute();
-		Assert.assertEquals(1, dir.size());
-		Assert.assertEquals(dir.get(0), Direction.NORTH);
-	}
+//	@Test
+//	public void testOptimize() {
+////		robot1.giveDirections(dir);
+//		robot1.optimizeRoute();
+//		Assert.assertEquals(1, dir.size());
+//		Assert.assertEquals(dir.get(0), Direction.NORTH);
+//	}
 }

@@ -1,8 +1,10 @@
 package finalproject;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
+import java.util.Random;
 
 import finalproject.Cell.CellType;
 import finalproject.Route.Direction;
@@ -14,10 +16,21 @@ public class Robot {
 	private ArrayList<Direction> currentPath;
 	private HashSet<Cell> traveledTo;
 	private CavernFinder cavernFinder;
+	private Color color;
+	private int pixelX;
+	private int pixelY;
+	private static final int XYDIM = 20;
 	
 	public Robot(int x, int y, CavernFinder cf) {
 		xCoord = x;
+		pixelX = x * XYDIM;
 		yCoord = y;
+		pixelY = y * XYDIM;
+		Random rgb = new Random();
+		int r = rgb.nextInt(256);
+		int g = rgb.nextInt(256);
+		int b = rgb.nextInt(256);
+		color = new Color(r, g, b);
 		cavernFinder = cf;
 		routesKnown = new ArrayList<Route>();
 	}
@@ -143,7 +156,6 @@ public class Robot {
 		ArrayList<Route> temp = robot.getRoutesKnown();
 		for (Route r : temp) {
 			if (cavern == r.getCellName()) {
-				//System.out.println("foo");
 				routesKnown.add(r);
 				return r;
 			}
@@ -208,6 +220,15 @@ public class Robot {
 			}
 			if (i < 0) i = -1;
 		}
+	}
+	
+	// Drawing function for Robots.
+	
+	public void draw(Graphics g) {
+		g.setColor(color);
+		g.fillOval(pixelY, pixelX, XYDIM, XYDIM);
+		g.setColor(Color.BLACK);
+		g.drawOval(pixelY, pixelX, XYDIM, XYDIM);
 	}
 	
 	// Getters and Setters

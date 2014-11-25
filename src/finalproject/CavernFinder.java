@@ -17,6 +17,7 @@ public class CavernFinder extends JFrame {
 	private Cell[][] theCave;
 	private ArrayList<Robot> robots;
 	private int currentRobot;
+	char currentCave;
 	private HashMap<Character, String> cells;
 	private static final String MAP_NAME = "caveMap.csv";
 	private static final String LEGEND_NAME = "legend.txt";
@@ -53,7 +54,7 @@ public class CavernFinder extends JFrame {
 		setJMenuBar(menuBar);
 		menuBar.add(createMenuBar());
 
-		drawGUI = new DrawGUI();
+		drawGUI = new DrawGUI(this);
 		add(drawGUI, BorderLayout.SOUTH);
 		
 		setSize(956, 900);

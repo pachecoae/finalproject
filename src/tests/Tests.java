@@ -140,16 +140,6 @@ public class Tests {
 		robot1.getRoutesKnown().add(route);
 		Assert.assertEquals('E', robot1.getTraveledTo().get(0));;
 	}
-<<<<<<< HEAD
-
-//	@Test
-//	public void testOptimize() {
-////		robot1.giveDirections(dir);
-//		robot1.optimizeRoute();
-//		Assert.assertEquals(1, dir.size());
-//		Assert.assertEquals(dir.get(0), Direction.NORTH);
-//	}
-=======
 	
 	@Test
 	public void testOptimize() {
@@ -167,5 +157,4 @@ public class Tests {
 		Assert.assertEquals(robot3.getyCoord(), 28);
 	}
 
->>>>>>> 8700b76414938213433a1ec375d69711c4cd5c5a
 }

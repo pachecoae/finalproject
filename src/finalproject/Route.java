@@ -29,5 +29,9 @@ public class Route {
 	public ArrayList<Direction> getTheRoute() {
 		return theRoute;
 	}
+	
+	public void addDirection(Direction direct) {
+		theRoute.add(direct);
+	}
 }
 

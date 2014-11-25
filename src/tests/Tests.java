@@ -1,9 +1,6 @@
 package tests;
 
-import static org.junit.Assert.fail;
-
 import java.util.ArrayList;
-import java.util.Stack;
 
 import junit.framework.Assert;
 
@@ -38,30 +35,29 @@ public class Tests {
 		//cavernFinder.getRobots().add(robot2);
 
 		// Create route to nearest cave.
-		/*route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-		route.getTheRoute().add(Direction.WEST);
-
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-		route.getTheRoute().add(Direction.NORTH);
-
-		route.getTheRoute().add(Direction.WEST);*/
 		
+		//LEFT, RIGHT, UP, DOWN
+//		route.addDirection(Direction.WEST);
+//		route.addDirection(Direction.WEST);
+//		route.addDirection(Direction.WEST);
+//		route.addDirection(Direction.WEST);
+//		route.addDirection(Direction.WEST);
+//		route.addDirection(Direction.WEST);
+//		route.addDirection(Direction.WEST);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.NORTH);
+//		route.addDirection(Direction.WEST);
+
 		//for optimize test
 		dir.add(Direction.WEST);
 		dir.add(Direction.WEST);
@@ -89,21 +85,13 @@ public class Tests {
 		Assert.assertEquals('F', cavernFinder.getCellAt(11, 17).getCellName());
 	}
 
-	@Test
-	public void testFindCave() {
-		robot2.getRoutesKnown().add(route);
-		robot1.askRobot(robot2, 'E');
-		Route newRoute = robot1.goToCave('E');
-		Assert.assertNotSame(robot2.getRoutesKnown().get(0), newRoute);
-		Assert.assertNotSame('E', newRoute.getCellName());
-	}
-
 	// Test Robot functions
 	@Test
 	public void testAskRobot() {
-		robot2.getRoutesKnown().add(route);
-		robot1.askRobot(robot2, 'E');
-		Assert.assertEquals(route, robot1.getRoutesKnown().get(0));
+		Assert.assertNull(robot1.askRobot(robot1, 'F'));
+		robot1.goToCave('F');
+		robot2.askRobot(robot1, 'F');
+		Assert.assertNotNull(robot2.askRobot(robot2, 'F'));	
 	}
 
 	@Test
@@ -125,20 +113,10 @@ public class Tests {
 	// }
 
 	@Test
-	public void testCurrentPath() {
-		robot1.getRoutesKnown().add(route);
-		robot1.goToCave('E');
-		// Check that the top of the stack is equal to the last elements in the route and
-		// that the bottom of the stack is equal to the first element in the route. I wasn't
-		// sure if you could directly compare a stack to an array list.
-		Assert.assertEquals(route.getTheRoute().get(0), robot1.getCurrentPath().get(robot1.getCurrentPath().size()));
-		Assert.assertEquals(route.getTheRoute().get(route.getTheRoute().size()), robot1.getCurrentPath().get(0));
-	}
-
-	@Test
 	public void testTravelledTo() {
-		robot1.getRoutesKnown().add(route);
-		Assert.assertEquals('E', robot1.getTraveledTo().get(0));;
+		Assert.assertNull(robot1.askRobot(robot1, 'C'));
+		robot1.goToCave('C');
+		Assert.assertNotNull(robot1.askRobot(robot1, 'C'));
 	}
 	
 	@Test

@@ -1,7 +1,8 @@
 package finalproject;
 
 import java.util.ArrayList;
-import java.util.Stack;
+import java.util.HashSet;
+import java.util.Set;
 
 import finalproject.Cell.CellType;
 import finalproject.Route.Direction;
@@ -11,7 +12,7 @@ public class Robot {
 	private int yCoord;
 	private ArrayList<Route> routesKnown;
 	private ArrayList<Direction> currentPath;
-	private ArrayList<Cell> traveledTo;
+	private HashSet<Cell> traveledTo;
 	private CavernFinder cavernFinder;
 	
 	public Robot(int x, int y, CavernFinder cf) {
@@ -25,7 +26,7 @@ public class Robot {
 	//TODO: If we find a cavern we aren't looking for, we should still add that route to our list of known routes
 	public Route goToCave(char cellName) {
 		//Refresh all of the route finding stuff
-		traveledTo = new ArrayList<Cell>();
+		traveledTo = new HashSet<Cell>();
 		currentPath = new ArrayList<Direction>();
 		boolean discovered = false;
 		
@@ -73,19 +74,19 @@ public class Robot {
 			traveledTo.add(cavernFinder.getCellAt(xCoord, yCoord));
 			
 			//Otherwise, look in all 4 directions for a valid space to move to (west, east, north, south)
-			if (cavernFinder.getCellAt(xCoord - 1, yCoord).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord - 1, yCoord).getCellType())) {
+			if (cavernFinder.getCellAt(xCoord - 1, yCoord).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord - 1, yCoord))) {
 				currentPath.add(Direction.WEST);
 				moveOneCell(Direction.WEST);
 			}
-			else if (cavernFinder.getCellAt(xCoord + 1, yCoord).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord + 1, yCoord).getCellType())) {
+			else if (cavernFinder.getCellAt(xCoord + 1, yCoord).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord + 1, yCoord))) {
 				currentPath.add(Direction.EAST);
 				moveOneCell(Direction.EAST);
 			}
-			else if (cavernFinder.getCellAt(xCoord, yCoord - 1).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord, yCoord - 1).getCellType())) {
+			else if (cavernFinder.getCellAt(xCoord, yCoord - 1).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord, yCoord - 1))) {
 				currentPath.add(Direction.NORTH);
 				moveOneCell(Direction.NORTH);
 			}
-			else if (cavernFinder.getCellAt(xCoord, yCoord + 1).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord, yCoord + 1).getCellType())) {
+			else if (cavernFinder.getCellAt(xCoord, yCoord + 1).getCellType() != CellType.WALL && !traveledTo.contains(cavernFinder.getCellAt(xCoord, yCoord + 1))) {
 				currentPath.add(Direction.SOUTH);
 				moveOneCell(Direction.SOUTH);
 			}
@@ -141,7 +142,11 @@ public class Robot {
 	public Route askRobot(Robot robot, char cavern) {
 		ArrayList<Route> temp = robot.getRoutesKnown();
 		for (Route r : temp) {
-			if (cavern == r.getCellName()) return r;
+			if (cavern == r.getCellName()) {
+				//System.out.println("foo");
+				routesKnown.add(r);
+				return r;
+			}
 		}
 		return null;
 	}
@@ -222,7 +227,7 @@ public class Robot {
 		return currentPath;
 	}
 
-	public ArrayList<Cell> getTraveledTo() {
+	public HashSet<Cell> getTraveledTo() {
 		return traveledTo;
 	}
 	

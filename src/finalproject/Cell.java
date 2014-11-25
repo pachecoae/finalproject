@@ -38,4 +38,19 @@ public class Cell {
 	public CellType getCellType() {
 		return cellType;
 	}
+
+	public int getX() {
+		return x;
+	}
+	
+	public int getY() {
+		return y;
+	}
+
+	public Boolean equals(Cell cell) {
+		if (this.x == cell.getX() && this.y == cell.getY()) {
+			return true;
+		}
+		return false;
+	}
 }

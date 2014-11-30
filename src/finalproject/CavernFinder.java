@@ -25,14 +25,16 @@ public class CavernFinder extends JFrame {
 	private int numY;
 	private static final int MAX_SIZE = 30;
 	private JMenuBar menuBar;
-//	private DrawCave drawCave;
-//	private DrawGUI drawGUI;
+	public DrawCave drawCave;
+	private DrawGUI drawGUI;
 
 	public CavernFinder() {
 		this.robots = new ArrayList<Robot>();
+		Robot robot1 = new Robot(28, 28, this);
+		robots.add(robot1);
 		this.currentRobot = 0;
 		this.cells = new HashMap<Character, String>();
-//		this.drawCave = new DrawCave(this);
+		this.drawCave = new DrawCave(this);
 	}
 
 	public void loadConfigFiles() {
@@ -48,14 +50,14 @@ public class CavernFinder extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Cavern Explorer");
-//		add(drawCave, BorderLayout.CENTER);
+		add(drawCave, BorderLayout.CENTER);
 		setSize(955, 850);
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		menuBar.add(createMenuBar());
 
-//		drawGUI = new DrawGUI(this);
-//		add(drawGUI, BorderLayout.SOUTH);
+		drawGUI = new DrawGUI(this);
+		add(drawGUI, BorderLayout.SOUTH);
 		
 		setSize(956, 900);
 	}
@@ -169,9 +171,10 @@ public class CavernFinder extends JFrame {
 		return currentRobot;
 	}
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		CavernFinder cF = new CavernFinder();
 		cF.loadConfigFiles();
 		cF.setUpGUI();
+		cF.getRobots().get(0).goToCave('H');
 	}
 }

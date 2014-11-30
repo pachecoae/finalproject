@@ -17,15 +17,11 @@ public class Robot {
 	private HashSet<Cell> traveledTo;
 	private CavernFinder cavernFinder;
 	private Color color;
-	private int pixelX;
-	private int pixelY;
 	private static final int XYDIM = 20;
 	
 	public Robot(int x, int y, CavernFinder cf) {
 		xCoord = x;
-		pixelX = x * XYDIM;
 		yCoord = y;
-		pixelY = y * XYDIM;
 		Random rgb = new Random();
 		int r = rgb.nextInt(256);
 		int g = rgb.nextInt(256);
@@ -37,7 +33,7 @@ public class Robot {
 	
 
 	//TODO: If we find a cavern we aren't looking for, we should still add that route to our list of known routes
-	public Route goToCave(char cellName) {
+	public Route goToCave(char cellName) throws InterruptedException {
 		//Refresh all of the route finding stuff
 		traveledTo = new HashSet<Cell>();
 		currentPath = new ArrayList<Direction>();
@@ -78,8 +74,11 @@ public class Robot {
 				}
 				//If we haven't seen the cave before, optimize the route and add this to our routes known list
 				if (!alreadyKnown) {
+					ArrayList<Direction> temp = new ArrayList<Direction>(currentPath);
 					optimizeRoute();
 					routesKnown.add(new Route(cavernFinder.getCellAt(xCoord, yCoord).getCellName(), currentPath));
+					currentPath = temp;
+		
 				}
 			}
 
@@ -124,14 +123,15 @@ public class Robot {
 				currentPath.remove(currentPath.size() - 1);
 			}
 		}
-		returnHome();
 		optimizeRoute();
+		returnHome();
 		Route temp = new Route(cellName, currentPath);
 		routesKnown.add(temp);
 		return temp;
 	}
 	
-	public void moveOneCell(Direction direction) {
+	public void moveOneCell(Direction direction) throws InterruptedException {
+		Thread.sleep(50);
 		switch (direction) {
 		case NORTH:
 			yCoord --;
@@ -150,6 +150,7 @@ public class Robot {
 		default:
 			break;
 		}
+		cavernFinder.drawCave.repaint();
 	}
 	
 	public Route askRobot(Robot robot, char cavern) {
@@ -163,7 +164,7 @@ public class Robot {
 		return null;
 	}
 	
-	public void returnHome() {
+	public void returnHome() throws InterruptedException {
 		for (int i = currentPath.size() - 1; i > -1; i--) {			
 			switch (currentPath.get(i)) {
 			case NORTH:
@@ -226,9 +227,9 @@ public class Robot {
 	
 	public void draw(Graphics g) {
 		g.setColor(color);
-		g.fillOval(pixelY, pixelX, XYDIM, XYDIM);
+		g.fillOval(xCoord*XYDIM, yCoord*XYDIM, XYDIM, XYDIM);
 		g.setColor(Color.BLACK);
-		g.drawOval(pixelY, pixelX, XYDIM, XYDIM);
+		g.drawOval(xCoord*XYDIM, yCoord*XYDIM, XYDIM, XYDIM);
 	}
 	
 	// Getters and Setters

@@ -24,7 +24,7 @@ public class DrawCave extends JPanel {
 		// Create a JFrame
 		JFrame f = new JFrame();
 		f.setSize(1000, 1000);
-		f.setTitle("Clue Board");
+		f.setTitle("Cave Finder");
 		f.setLayout(null);
 
 		// Add JPanel to your JFrame

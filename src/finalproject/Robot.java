@@ -46,11 +46,10 @@ public class Robot {
 			if (r.getCellName() == cellName) {
 				//If we already know the route, just travel through its directions and then return home
 				discovered = true;
-				ArrayList<Direction> temp = r.getTheRoute();
-				for (Direction d : temp) {
+				currentPath = r.getTheRoute();
+				for (Direction d : currentPath) {
 					moveOneCell(d);
 				}
-				returnHome();
 				break;
 			}
 		}
@@ -131,7 +130,7 @@ public class Robot {
 	}
 	
 	public void moveOneCell(Direction direction) throws InterruptedException {
-		Thread.sleep(50);
+		Thread.sleep(25);
 		switch (direction) {
 		case NORTH:
 			yCoord --;
@@ -251,6 +250,10 @@ public class Robot {
 
 	public HashSet<Cell> getTraveledTo() {
 		return traveledTo;
+	}
+	
+	public void giveRoute(Route r) {
+		routesKnown.add(r);
 	}
 	
 	//For testing purposes

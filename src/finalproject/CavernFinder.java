@@ -31,7 +31,13 @@ public class CavernFinder extends JFrame {
 	public CavernFinder() {
 		this.robots = new ArrayList<Robot>();
 		Robot robot1 = new Robot(28, 28, this);
+		Robot robot2 = new Robot(28, 28, this);
+		Robot robot3 = new Robot(28, 28, this);
+		Robot robot4 = new Robot(28, 28, this);
 		robots.add(robot1);
+		robots.add(robot2);
+		robots.add(robot3);
+		robots.add(robot4);
 		this.currentRobot = 0;
 		this.cells = new HashMap<Character, String>();
 		this.drawCave = new DrawCave(this);
@@ -171,10 +177,24 @@ public class CavernFinder extends JFrame {
 		return currentRobot;
 	}
 
+	public void nextMove(char c) throws InterruptedException {
+		currentRobot++;
+		if (robots.get(currentRobot % 4).askRobot(robots.get(currentRobot % 4), c) != null) robots.get(currentRobot % 4).goToCave(c);
+		else if (robots.get(currentRobot % 4).askRobot(robots.get((currentRobot + 1) % 4), c) != null) {
+			robots.get(currentRobot % 4).giveRoute(robots.get(currentRobot % 4).askRobot(robots.get((currentRobot + 1) % 4), c));
+			robots.get(currentRobot % 4).goToCave(c);
+		} else {
+			robots.get(currentRobot % 4).goToCave(c);
+		}
+	}
+	
 	public static void main(String[] args) throws InterruptedException {
 		CavernFinder cF = new CavernFinder();
 		cF.loadConfigFiles();
 		cF.setUpGUI();
-		cF.getRobots().get(0).goToCave('H');
+		cF.nextMove('A');
+		cF.nextMove('A');
+		cF.nextMove('A');
+		cF.nextMove('B');
 	}
 }

@@ -12,11 +12,12 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 public class CavernFinder extends JFrame {
 	private Cell[][] theCave;
 	private ArrayList<Robot> robots;
-	private int currentRobot;
+	public int currentRobot;
 	char currentCave;
 	private HashMap<Character, String> cells;
 	private static final String MAP_NAME = "caveMap.csv";
@@ -192,9 +193,10 @@ public class CavernFinder extends JFrame {
 		CavernFinder cF = new CavernFinder();
 		cF.loadConfigFiles();
 		cF.setUpGUI();
-		cF.nextMove('A');
-		cF.nextMove('A');
-		cF.nextMove('A');
-		cF.nextMove('B');
+		String[] options = {"A", "B", "C", "D", "E", "F", "G", "H"};
+		while (true) {
+			String n = (String)JOptionPane.showInputDialog(cF, "Please select the cavern for robot " + (cF.currentRobot % 4 + 1), "Cavern Finding Program", JOptionPane.PLAIN_MESSAGE, null, options, "A");
+			cF.nextMove(n.charAt(0));
+		}
 	}
 }

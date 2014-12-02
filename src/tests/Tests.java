@@ -87,7 +87,7 @@ public class Tests {
 
 	// Test Robot functions
 	@Test
-	public void testAskRobot() {
+	public void testAskRobot() throws InterruptedException {
 		Assert.assertNull(robot1.askRobot(robot1, 'F'));
 		robot1.goToCave('F');
 		robot2.askRobot(robot1, 'F');
@@ -95,7 +95,7 @@ public class Tests {
 	}
 
 	@Test
-	public void testMoveOneCell() {
+	public void testMoveOneCell() throws InterruptedException {
 		robot1.moveOneCell(Direction.NORTH);
 		Assert.assertEquals(28, robot1.getxCoord());
 		Assert.assertEquals(27, robot1.getyCoord());
@@ -113,7 +113,7 @@ public class Tests {
 	// }
 
 	@Test
-	public void testTravelledTo() {
+	public void testTravelledTo() throws InterruptedException {
 		Assert.assertNull(robot1.askRobot(robot1, 'C'));
 		robot1.goToCave('C');
 		Assert.assertNotNull(robot1.askRobot(robot1, 'C'));
@@ -128,7 +128,7 @@ public class Tests {
 	}
 	
 	@Test
-	public void testReturnHome() {
+	public void testReturnHome() throws InterruptedException {
 		robot3.giveDirections(homeTest);
 		robot3.returnHome();
 		Assert.assertEquals(robot3.getxCoord(), 28);

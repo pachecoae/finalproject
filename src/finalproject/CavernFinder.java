@@ -27,6 +27,7 @@ public class CavernFinder extends JFrame {
 	private static final int MAX_SIZE = 30;
 	public DrawCave drawCave;
 
+
 	public CavernFinder() {
 		this.robots = new ArrayList<Robot>();
 		Robot robot1 = new Robot(28, 28, this);
@@ -55,14 +56,9 @@ public class CavernFinder extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Cavern Explorer");
-		
-		setSize(955, 850);
-		JMenuBar menuBar = new JMenuBar();
-		setJMenuBar(menuBar);
-		menuBar.add(createMenuBar());
 
 		add(drawCave, BorderLayout.CENTER);
-		setSize(617, 662);
+		setSize(617, 638);
 	}
 
 	public JMenuItem createMenuBar() {
